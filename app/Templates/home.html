@@ -1,0 +1,243 @@
+{% extends 'new_base.html' %}
+
+
+
+{% block content %}
+<div class="myTitle">
+  <img src="../static/wip.jpg" alt="Title" width="100%" height="140px">
+  <div class="title_text">GDM</div>
+</div>
+<!--<img src="static/mipmlp_title_example.png" width="2000px" height="200px" alt="Title">-->
+<body class="content" onload="input_format_manager(true);">
+  <form method="post"  enctype=multipart/form-data class="">
+    <div >
+    {% macro build_option(name, selected_att) -%}
+    {% if name == selected_att %}
+      <option value="{{ name }}" selected="selected">{{name}}</option>
+    {% else %}
+      <option value="{{ name }}">{{name}}</option>
+    {% endif %}
+    {%- endmacro %}
+
+    <script>
+
+    function input_format_manager(is_file) {
+        const file_box = document.getElementById("file_box");
+        const manual_box = document.getElementById("manual_box");
+        const inputs = document.getElementsByClassName("manual_input")
+        const file = document.getElementById("feature_file")
+        if(is_file){
+          document.getElementById("manual_button").style.backgroundColor='#FFFFFF'
+          document.getElementById("file_button").style.backgroundColor= '#F7A1A4'
+          file.disabled = false;
+          for(var i = 0, length = inputs.length; i < length; i++) {
+            inputs[i].disabled = true;
+          }
+          manual_box.style.backgroundColor = "#F8A0A2"
+          file_box.style.backgroundColor = "#FA595F"
+        }
+        else {
+          document.getElementById("file_button").style.backgroundColor='#FFFFFF'
+          document.getElementById("manual_button").style.backgroundColor= '#F7A1A4'
+          for(var j = 0, len = inputs.length; j < len; j++) {
+            inputs[j].disabled = false;
+          }
+          file.disabled = true;
+          manual_box.style.backgroundColor = "#FA595F"
+          file_box.style.backgroundColor = "#F8A0A2"
+        }
+    }
+
+    </script>
+
+
+
+    <button class="btn" id="file_button" type="button" style="margin-left: 20em" onclick="input_format_manager(true)">enter data file</button>
+    <button class="btn2" id="manual_button" type="button" style="margin-left: 0" onclick="input_format_manager(false)">enter features manually</button>
+
+    <br>
+    <br>
+
+    <div class="input_box" id="file_box">
+
+
+    <div id="features" style="margin-left: 43%">
+      <label for="feature_file">Select data file:<br></label>
+      <input type=file id="feature_file" name="feature_file" value="{{feature_file}}">
+    </div>
+
+    </div>
+
+    <br>
+
+    <div class="central_box" id="manual_box">
+      <div style="display: inline-block; margin-left: 10.8em">
+      <label for="one">1<br></label>
+      {% if epsilon is not defined %}
+        {% set epsilon = 0 %}
+      {% endif %}
+      <input type="number" min="0" class="manual_input" style="width: 6em" step="any" name="one" id="one" value="{{one}}">
+    </div>
+
+
+      <div style="display: inline-block; margin-left: 11em">
+      <label for="two">2<br></label>
+      {% if epsilon is not defined %}
+        {% set epsilon = 0 %}
+      {% endif %}
+      <input type="number" min="0" class="manual_input" style="width: 6em" step="any" name="two" id="two" value="{{two}}">
+    </div>
+
+
+    <div style="display: inline-block; margin-left: 11em">
+      <label for="three">3<br></label>
+      {% if epsilon is not defined %}
+        {% set epsilon = 0 %}
+      {% endif %}
+      <input type="number" min="0" class="manual_input" style="width: 6em" step="any" name="three" id="three" value="{{three}}">
+    </div>
+
+
+    <div style="display: inline-block; margin-left: 11em">
+      <label for="four">4<br></label>
+      {% if epsilon is not defined %}
+        {% set epsilon = 0.1 %}
+      {% endif %}
+      <input type="number" min="0" class="manual_input" style="width: 6em" step="any" name="four" id="four" value="{{four}}">
+    </div>
+
+          <br><br><br>
+
+
+    <div style="display: inline-block; margin-left: 7em">
+      <label for="five">5<br></label>
+      {% if epsilon is not defined %}
+        {% set epsilon = 0 %}
+      {% endif %}
+      <input type="number" min="0" class="manual_input" style="width: 6em" step="any" name="five" id="five" value="{{five}}">
+    </div>
+
+
+    <div style="display: inline-block; margin-left: 9em">
+      <label for="six">6<br></label>
+      {% if epsilon is not defined %}
+        {% set epsilon = 0 %}
+      {% endif %}
+      <input type="number" min="0" class="manual_input" style="width: 6em" step="any" name="six" id="six" value="{{six}}">
+    </div>
+
+
+    <div style="display: inline-block; margin-left: 9em">
+      <label for="seven">7<br></label>
+      {% if epsilon is not defined %}
+        {% set epsilon = 0 %}
+      {% endif %}
+      <input type="number" min="0" class="manual_input" style="width: 6em" step="any" name="seven" id="seven" value="{{seven}}">
+    </div>
+
+
+    <div style="display: inline-block; margin-left: 9em">
+      <label for="eight">8<br></label>
+      {% if epsilon is not defined %}
+        {% set epsilon = 0 %}
+      {% endif %}
+      <input type="number" min="0" class="manual_input" style="width: 6em" step="any" name="eight" id="eight" value="{{eight}}">
+    </div>
+
+      <div style="display: inline-block; margin-left: 9em">
+      <label for="nine">9<br></label>
+      {% if epsilon is not defined %}
+        {% set epsilon = 0 %}
+      {% endif %}
+      <input type="number" min="0" class="manual_input" style="width: 6em" step="any" name="nine" id="nine" value="{{nine}}">
+    </div>
+
+      </div>
+    <br>
+
+    <input class="submit_btn" type="submit" value="calculate" onclick="calculating();">
+        {% for message in get_flashed_messages() %}
+{#    {% if message == "The number of components should be -1 or positive integer (not 0)." %}#}
+    <p style="color: firebrick; text-align: center">{{ message }}</p>
+{#    {% endif %}#}
+    {% endfor %}
+    <p class="calc" id="txt_mes" ></p>
+    </div>
+  </form>
+
+  {% if results != None %}
+
+  <button class="download-button" style="margin-left: 13%">
+      <a href="/download-outputs">download result file</a>
+    </button>
+ </body>
+
+  {% endif %}
+
+  {% if plots != None %}
+
+    <p><img src="../static/bar_plot.svg" style="margin-left: 34%" id="img" /></p>
+
+  {% endif %}
+
+
+    <script>
+
+    function calculating() {
+        const inputs = document.getElementsByClassName("manual_input")
+        const file = document.getElementById("feature_file")
+        file.disabled = false;
+          for(var i = 0, length = inputs.length; i < length; i++) {
+            inputs[i].disabled = false;
+          }
+        document.getElementById("txt_mes").innerHTML = "Calculating...";
+    }
+
+    function remove_mes() {
+        document.getElementById("txt_mes").innerHTML = "";
+    }
+
+    function image_page() {
+      open(URL="{{ '/' + 'Results' }}")
+    }
+
+    </script>
+
+
+  <style>
+  * {
+    box-sizing: border-box;
+  }
+
+  .column {
+    float: left;
+    width: 33.33%;
+    padding: 5px;
+  }
+
+  /* Clearfix (clear floats) */
+  .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  body {
+    background-color: rgb(244, 251, 253);
+}
+  </style>
+
+
+
+  {% if images_names is defined %}
+
+      <script>
+        remove_mes()
+        image_page()
+      </script>
+
+  {% endif %}
+
+</body>
+
+{% endblock %}
