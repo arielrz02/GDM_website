@@ -11,14 +11,16 @@ bp = Blueprint('/', __name__, url_prefix='/')
 @bp.route('/Home', methods=('GET', 'POST'))
 def home_page():
     error = None
+    yes_no_dict = {"Yes": "3", "No": "2", "NA": "2.17"}
     if request.method == 'POST':
         try:
             remove("static/bar_plot.svg")
         except:
             pass
-        manual_features = (request.form["one"], request.form["two"], request.form["three"],
-                           request.form["four"], request.form["five"], request.form["six"],
-                           request.form["seven"], request.form["eight"], request.form["nine"])
+        manual_features = (yes_no_dict[request.form["one"]], yes_no_dict[request.form["two"]],
+                           yes_no_dict[request.form["three"]], request.form["four"],
+                           request.form["five"], request.form["six"], request.form["seven"],
+                           request.form["eight"], request.form["nine"])
         file = request.files["feature_file"]
         if not file:
             if "" in manual_features:
@@ -33,6 +35,7 @@ def home_page():
             plots = "true"
         if error:
             flash(error)
+            return render_template('home.html', active='Home', results=None, plots=None)
         return render_template('home.html', active='Home', results="results.csv", plots=plots)
     return render_template('home.html', active='Home', results=None, plots=None)
 

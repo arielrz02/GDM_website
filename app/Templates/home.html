@@ -3,10 +3,8 @@
 
 
 {% block content %}
-<div class="myTitle">
-  <img src="../static/wip.jpg" alt="Title" width="100%" height="140px">
-  <div class="title_text">GDM</div>
-</div>
+  <img src="../static/logo_micmark.png", style="display: inline-block">
+  <div class="title_text">MicMark's early GDM predictor</div>
 <!--<img src="static/mipmlp_title_example.png" width="2000px" height="200px" alt="Title">-->
 <body class="content" onload="input_format_manager(true);">
   <form method="post"  enctype=multipart/form-data class="">
@@ -25,13 +23,19 @@
         const file_box = document.getElementById("file_box");
         const manual_box = document.getElementById("manual_box");
         const inputs = document.getElementsByClassName("manual_input")
+        const labels = document.getElementsByClassName("manual_label")
         const file = document.getElementById("feature_file")
+        const file_label = document.getElementById("file_label")
         if(is_file){
           document.getElementById("manual_button").style.backgroundColor='#FFFFFF'
           document.getElementById("file_button").style.backgroundColor= '#F7A1A4'
           file.disabled = false;
           for(var i = 0, length = inputs.length; i < length; i++) {
             inputs[i].disabled = true;
+          }
+          file_label.style.color = "#000000"
+          for(var i = 0, length = labels.length; i < length; i++) {
+            labels[i].style.color = "#6F6F6F";
           }
           manual_box.style.backgroundColor = "#F8A0A2"
           file_box.style.backgroundColor = "#FA595F"
@@ -42,6 +46,10 @@
           for(var j = 0, len = inputs.length; j < len; j++) {
             inputs[j].disabled = false;
           }
+          for(var i = 0, length = labels.length; i < length; i++) {
+            labels[i].style.color = "#000000";
+          }
+          file_label.style.color = "#6F6F6F"
           file.disabled = true;
           manual_box.style.backgroundColor = "#FA595F"
           file_box.style.backgroundColor = "#F8A0A2"
@@ -62,7 +70,7 @@
 
 
     <div id="features" style="margin-left: 43%">
-      <label for="feature_file">Select data file:<br></label>
+      <label for="feature_file" id="file_label">Select data file:<br></label>
       <input type=file id="feature_file" name="feature_file" value="{{feature_file}}">
     </div>
 
@@ -72,34 +80,37 @@
 
     <div class="central_box" id="manual_box">
       <div style="display: inline-block; margin-left: 10.8em">
-      <label for="one">1<br></label>
-      {% if epsilon is not defined %}
-        {% set epsilon = 0 %}
-      {% endif %}
-      <input type="number" min="0" class="manual_input" style="width: 6em" step="any" name="one" id="one" value="{{one}}">
+      <label for="one" class="manual_label">Medications<br></label>
+      <select name="one" id="one" class="manual_input">
+        {{ build_option('Yes', one) }}
+        {{ build_option('No', one) }}
+        {{ build_option('NA', one) }}
+      </select>
     </div>
 
 
       <div style="display: inline-block; margin-left: 11em">
-      <label for="two">2<br></label>
-      {% if epsilon is not defined %}
-        {% set epsilon = 0 %}
-      {% endif %}
-      <input type="number" min="0" class="manual_input" style="width: 6em" step="any" name="two" id="two" value="{{two}}">
+      <label for="two" class="manual_label">Aspirin<br></label>
+      <select name="two" id="two" class="manual_input">
+        {{ build_option('Yes', two) }}
+        {{ build_option('No', two) }}
+        {{ build_option('NA', two) }}
+      </select>
     </div>
 
 
     <div style="display: inline-block; margin-left: 11em">
-      <label for="three">3<br></label>
-      {% if epsilon is not defined %}
-        {% set epsilon = 0 %}
-      {% endif %}
-      <input type="number" min="0" class="manual_input" style="width: 6em" step="any" name="three" id="three" value="{{three}}">
+      <label for="three" class="manual_label">Smoker?<br></label>
+      <select name="three" id="three" class="manual_input">
+        {{ build_option('Yes', three) }}
+        {{ build_option('No', three) }}
+        {{ build_option('NA', three) }}
+      </select>
     </div>
 
 
     <div style="display: inline-block; margin-left: 11em">
-      <label for="four">4<br></label>
+      <label for="four" class="manual_label">BMI<br></label>
       {% if epsilon is not defined %}
         {% set epsilon = 0.1 %}
       {% endif %}
@@ -110,7 +121,7 @@
 
 
     <div style="display: inline-block; margin-left: 7em">
-      <label for="five">5<br></label>
+      <label for="five" class="manual_label">FGT_T1<br></label>
       {% if epsilon is not defined %}
         {% set epsilon = 0 %}
       {% endif %}
@@ -119,7 +130,7 @@
 
 
     <div style="display: inline-block; margin-left: 9em">
-      <label for="six">6<br></label>
+      <label for="six" class="manual_label">Sleeping hours<br></label>
       {% if epsilon is not defined %}
         {% set epsilon = 0 %}
       {% endif %}
@@ -127,8 +138,8 @@
     </div>
 
 
-    <div style="display: inline-block; margin-left: 9em">
-      <label for="seven">7<br></label>
+    <div style="display: inline-block; margin-left: 9em" class="manual_label">
+      <label for="seven">GOT<br></label>
       {% if epsilon is not defined %}
         {% set epsilon = 0 %}
       {% endif %}
@@ -137,7 +148,7 @@
 
 
     <div style="display: inline-block; margin-left: 9em">
-      <label for="eight">8<br></label>
+      <label for="eight" class="manual_label">GPT<br></label>
       {% if epsilon is not defined %}
         {% set epsilon = 0 %}
       {% endif %}
@@ -145,7 +156,7 @@
     </div>
 
       <div style="display: inline-block; margin-left: 9em">
-      <label for="nine">9<br></label>
+      <label for="nine" class="manual_label">PAPP-A [mU/L]<br></label>
       {% if epsilon is not defined %}
         {% set epsilon = 0 %}
       {% endif %}

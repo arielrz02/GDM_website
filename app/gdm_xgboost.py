@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import roc_auc_score, plot_roc_curve
 from sklearn.model_selection import GroupShuffleSplit
@@ -65,6 +66,7 @@ def xgb_for_site(to_pred):
 
 
 def xgboost_cv(data, tags, group_id, params, cv):
+    data = z_score(data)
     auc_lst = np.zeros(shape=(cv, ))
     auc_lst_train = np.zeros(shape=(cv, ))
     for i in range(cv):
@@ -75,6 +77,7 @@ def xgboost_cv(data, tags, group_id, params, cv):
         pred_train = clf.predict_proba(train_data)[:, 1]
         auc_lst[i], auc_lst_train[i] = roc_auc_score(val_tag, pred_val), roc_auc_score(train_tag, pred_train)
         plot_roc_curve(clf, val_data, val_tag)
+        plt.savefig("roc_curve1")
     print(auc_lst, auc_lst_train)
     return auc_lst.mean(), auc_lst.std(), auc_lst_train.mean(), auc_lst_train.std()
 
@@ -98,4 +101,4 @@ if __name__=="__main__":
     #for col in [0.3, 0.4, 0.5, 0.7]:
     params = {"learning_rate": 0.1, "reg_lambda": 100, "booster": "dart", "gamma": 0.1, "colsample_bytree": 0.7}
     data_full = prep_data("static/forsite_new_data.csv", "static/forsite_new_tags.csv")
-    print(xgboost_predict(*data_full, params=params, to_pred=data_full[0][9:10]))
+    xgboost_cv(*data_full, params=params, cv=1)
