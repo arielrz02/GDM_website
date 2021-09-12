@@ -3,7 +3,60 @@
 {% block content %}
 <section class="content">
   <header>
-    <p>WORK IN PROGRESS</p>
+    <div id="box">
+    <span id="content">
+    <table>
+      <tr>
+        <td>
+    <p class="with_margin">While using this website to predict, you have two options:
+      <br>1) You can enter a file with one or multiple row of data, each corresponding to a woman.
+      <br>2) You can enter the data manually for one woman only.
+      To switch between the two options, you press the corresponding button in the top left.
+    </p>
+        </td>
+        <td>
+        </td>
+      </tr>
+      <tr>
+        <td>
+    <p class="with_margin">If you choose to use the file, you should click the top option,
+      and choose the file from your computer, it should look like this:
+      <button class="example-button">
+      <a href="/download-example-file">download an example file</a>
+      </button>
+    </p>
+      </td>
+      <td>
+    <img src="../static/example_file.png" alt="example file" width="55%" border="1px" style="margin-left: 7.5em">
+      </td>
+      </tr>
+      <tr>
+        <td>
+    <p class="with_margin">Meanwhile, if you choose to enter manually, you either enter yes or no,
+      or the correct amount for each numerical box. All boxes must be filled out.
+      After you fill it out, it should look like this:</p>
+        </td>
+        <td>
+    <p><img src="../static/example_manual.png" alt="example manual" width="55%" border="1px" style="margin-left: 7.5em"></p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+    <p class="with_margin">Now, you should click the "Calculate" button,
+      and it will calculate the probability that the patient has GDM.
+      If you entered multiple rows in the file, the website should look like the top plot,
+       and if you entered the data manually or with a single row, it should look like the bottom.
+    </p>
+      </td>
+      <td>
+    <p><img src="../static/result_example_noplot.png" alt="no plot" width="35%" border="1px" style="margin-left: 12em">
+      <img src="../static/result_example_plot.png" alt="plot" width="35%" border="1px" style="margin-left: 12em">
+    </p>
+      </td>
+      </tr>
+    </table>
+    </span>
+    </div>
   </header>
 </section>
 {% endblock %}

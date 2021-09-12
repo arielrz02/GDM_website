@@ -61,3 +61,6 @@ def about_page():
 def download():
     return send_file("static/results.csv", mimetype="csv", as_attachment=True)
 
+@bp.route('/download-example-file')
+def download_exmple():
+    return send_file("static/example_data.csv", mimetype="csv", as_attachment=True)
