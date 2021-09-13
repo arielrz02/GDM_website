@@ -31,13 +31,13 @@ def plot_res(pos_under, pos, neg_under, neg):
     ax1.axes.yaxis.set_visible(False)
     ax1.axes.xaxis.set_visible(False)
     ax1.imshow(img)
-    ax1.axvline(x=(1 - (pos_under / pos)) * ax1.get_xlim()[1])
-    ax1.set_title(f"Your data has a larger score than {pos_under}"
-                  f" out of {pos} positives for GDM\n")
+    ax1.axvline(x=(pos_under / pos) * ax1.get_xlim()[1])
+    ax1.set_title(f"Your data has a larger score than {100*pos_under/pos:.2f}"
+                  f" precent of positives for GDM\n")
     ax2.axes.yaxis.set_visible(False)
     ax2.axes.xaxis.set_visible(False)
     ax2.imshow(img)
     ax2.axvline(x=(1 - (neg_under / neg)) * ax1.get_xlim()[1])
-    ax2.set_title(f"And a smaller score than {neg_under}"
-                  f" out of {neg} negatives for GDM\n")
+    ax2.set_title(f"And a smaller score than {100*neg_under/neg: .2f}"
+                  f" precent of negatives for GDM\n")
     plt.savefig("static/bar_plot.svg")
