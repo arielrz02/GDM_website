@@ -4,7 +4,35 @@
 {% block content %}
     <section class="content">
       <body>
-        <p> WORK IN PROGRESS</p>
+      <div style="display: inline-block; vertical-align: top">
+        <p class="with_margin" style="margin-bottom: 0">The purpose of this website is to predict the probability of GDM using general<br>
+        clinical data at the 12th week of pregnancy <br>
+        The fields we use to predict the disease are:</p>
+        <p class="with_margin" style="margin-left: 6em; margin-top: 0"> <b>Medications</b>: chronic medications (Yes; No) taken prior to the second trimester.<br>
+            <b>Aspirin</b>: aspirin during pregnancy (Yes; No) prior to the second trimester.<br>
+            <b>Smoking</b>: smoking during pregnancy (Yes; No).<br>
+            <b>BMI</b>: body mass index.<br>
+            <b>FGT</b>: fasting glucose test in the 1st trimester.<br>
+            <b>Sleeping hours</b>: hours slept every night on average.<br>
+            <b>GOT</b>: oral glucose tolerance test in the 1st trimester.<br>
+            <b>GPT</b>: conventional urine pregnancy test in the 1st trimester.<br>
+            <b>PAPP-A</b>: Pregnancy-associated plasma protein A in milliunits per liter</p>
+      </div>
+      <div style="display: inline-block; vertical-align: top; margin-left: 6em">
+          <p class="with_margin">The prediction is made using an XGBoost algorithm with an ROC-AUC score of 0.82.<br>
+             The plots below represent the ROC curve and the distribution of<br>
+              positives and negative scores in the sample used here.<br>
+              We report the results as the aboslute score of the algorithm,<br>
+              as well as the relative position vs all the positive and negative samples.<br>
+              The results are based on a survey in the Israeli population.<br>
+              A more accurate estimate of the probability of GDM can be obtained<br>
+              using an additional microbiome sample.<br>
+              The results presented here are the statistical outcome of a machine learning algorithm<br>
+              They do not come  instead of a medical advice from a practitioner.<br>
+              <img src="../static/roc_curve.png" alt="roc curve" width="360em" style="horiz-align: center; display: inline-block">
+              <img src="../static/pos_neg_hist.png" alt="pos neg hist" width="360em" style="horiz-align: center; display: inline-block">
+          </p>
+      </div>
       </body>
     </section>
 
